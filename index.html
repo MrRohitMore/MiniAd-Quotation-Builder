@@ -7,31 +7,59 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#080808;--s1:#111111;--s2:#161616;--s3:#1c1c1c;
-  --b:rgba(255,255,255,0.07);--b2:rgba(255,255,255,0.13);--b3:rgba(255,255,255,0.22);
-  --w:#ffffff;--muted:#888888;--faint:#444444;
-  --g:#22C55E;--gd:rgba(34,197,94,0.09);--gg:rgba(34,197,94,0.22);
-  --o:#FF6B35;--amber:#F59E0B;--danger:#ef4444;
+  /* ── User Specified Palette ── */
+  --forest:#1D4533;        /* Deep Forest Green — Headlines, Client Name, Primary Actions */
+  --forest-d:rgba(29,69,51,0.22);
+  --cream:#F7EAE0;         /* Soft Alabaster Cream — Body Text & Contrast */
+  --cream-d:rgba(247,234,224,0.15);
+  --peach:#F9D2BA;         /* Soft Warm Peach — Services, Prices, Highlights */
+  --peach-d:rgba(249,210,186,0.12);
+  --espresso:#5E3122;      /* Deep Espresso Brown — Accent borders & Callouts */
+  --espresso-d:rgba(94,49,34,0.2);
+
+  /* Official Logo Brand Color */
+  --logo-green:#00D87C;    /* Exact official miniad.io green */
+  --logo-green-d:rgba(0,216,124,0.12);
+
+  /* Dark Warm Forest System */
+  --bg:#0A100D;            /* Deep dark forest obsidian */
+  --s1:#111915;            /* Card surface */
+  --s2:#18221D;            /* Elevated surface */
+  --s3:#212D27;            /* Highlight surface */
+  --b:rgba(247,234,224,0.09);   /* Cream-tinted border */
+  --b2:rgba(247,234,224,0.18);
+  --b3:rgba(247,234,224,0.28);
+  --w:#F7EAE0;             /* Alabaster cream text */
+  --muted:#C9BEB5;         /* Soft warm beige-grey */
+  --faint:#756B63;         /* Deep warm muted tone */
+  --amber:#F9D2BA;
+  --danger:#5E3122;
+  --g:#1D4533;
+  --gd:rgba(29,69,51,0.2);
   --f-d:'Outfit',sans-serif;--f-b:'Inter',sans-serif;
 }
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--w);font-family:var(--f-b);overflow-x:hidden;line-height:1.6;min-height:100vh}
+body{
+  background:var(--bg);
+  background-image:radial-gradient(ellipse 80% 60% at 0% 30%, rgba(29,69,51,0.3) 0%, transparent 60%),
+                   radial-gradient(ellipse 60% 50% at 100% 80%, rgba(249,210,186,0.1) 0%, transparent 60%);
+  color:var(--w);font-family:var(--f-b);overflow-x:hidden;line-height:1.6;min-height:100vh
+}
 
 /* ─── SCREEN LAYOUT ─── */
 .app{display:grid;grid-template-columns:520px 1fr;min-height:100vh;max-width:1480px;margin:0 auto}
-.builder-col{background:var(--s1);border-right:1px solid var(--b);overflow-y:auto;height:100vh;position:sticky;top:0;display:flex;flex-direction:column}
-.preview-col{overflow-y:auto;height:100vh;background:var(--bg)}
+.builder-col{background:var(--s1);border-right:1px solid var(--b);overflow-y:auto;height:100vh;position:sticky;top:0;display:flex;flex-direction:column;background-image:radial-gradient(ellipse 100% 50% at 0% 20%, rgba(29,69,51,0.2) 0%, transparent 70%)}
+.preview-col{overflow-y:auto;height:100vh;background:transparent}
 
 /* ─── BUILDER HEAD ─── */
 .bh{padding:22px 28px 0;border-bottom:1px solid var(--b);background:var(--s1);flex-shrink:0}
 .bh-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
-.bh-logo{font-family:var(--f-d);font-size:18px;font-weight:900}.bh-logo em{font-style:normal;color:var(--g)}
-.bh-badge{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--g);background:var(--gd);border:1px solid rgba(34,197,94,0.3);padding:4px 10px;border-radius:2px}
+.bh-logo{font-family:var(--f-d);font-size:19px;font-weight:900;letter-spacing:-.3px;color:var(--w)}.bh-logo em{font-style:normal;color:var(--logo-green)}
+.bh-badge{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--logo-green);background:var(--logo-green-d);border:1px solid rgba(0,216,124,0.3);padding:4px 10px;border-radius:2px}
 .step-tabs{display:flex}
 .stab{flex:1;padding:9px 4px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-align:center;cursor:pointer;color:var(--faint);border-bottom:2px solid transparent;transition:all .2s;font-family:var(--f-d)}
-.stab.on{color:var(--g);border-bottom-color:var(--g)}
+.stab.on{color:var(--peach);border-bottom-color:var(--peach)}
 .stab:hover{color:var(--muted)}
 
 /* ─── STEP BODY ─── */
@@ -39,28 +67,28 @@ body{background:var(--bg);color:var(--w);font-family:var(--f-b);overflow-x:hidde
 .step{display:none;animation:fadein .2s ease}
 .step.on{display:block}
 @keyframes fadein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.step-title{font-family:var(--f-d);font-size:19px;font-weight:900;letter-spacing:-.3px;margin-bottom:4px}
+.step-title{font-family:var(--f-d);font-size:19px;font-weight:900;letter-spacing:-.3px;margin-bottom:4px;color:var(--peach)}
 .step-sub{font-size:12px;color:var(--muted);margin-bottom:22px;line-height:1.55}
 
 /* FORM */
 .fg{margin-bottom:16px}
 .fl{display:block;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
 .fi,.fta,.fsel{width:100%;background:var(--s2);border:1px solid var(--b2);border-radius:3px;padding:10px 13px;font-size:13px;color:var(--w);font-family:var(--f-b);outline:none;transition:border-color .2s;appearance:none}
-.fi:focus,.fta:focus,.fsel:focus{border-color:var(--g)}
+.fi:focus,.fta:focus,.fsel:focus{border-color:var(--peach);box-shadow:0 0 0 3px rgba(249,210,186,0.15)}
 .fta{resize:vertical;min-height:72px}
-.fsel{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2322C55E' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
-.fsel option{background:#111;color:#fff}
+.fsel{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23F9D2BA' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
+.fsel option{background:#111915;color:#F7EAE0}
 .fi-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 
 /* SERVICES */
 .svc-builder{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
-.svc-row{background:var(--s2);border:1px solid var(--b);border-radius:3px;overflow:hidden;transition:border-color .2s}
-.svc-row.checked{border-color:rgba(34,197,94,.35);background:rgba(34,197,94,.04)}
+.svc-row{background:var(--s2);border:1px solid var(--b);border-radius:3px;overflow:hidden;transition:all .2s}
+.svc-row.checked{border-color:rgba(249,210,186,.4);background:rgba(249,210,186,.05);box-shadow:0 0 0 1px rgba(249,210,186,.15) inset}
 .svc-row-head{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;user-select:none}
 .svc-check{width:17px;height:17px;border:1.5px solid var(--b3);border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;font-size:10px;font-weight:900;color:transparent}
-.svc-row.checked .svc-check{background:var(--g);border-color:var(--g);color:#000}
-.svc-row-name{font-family:var(--f-d);font-size:13px;font-weight:700;flex:1;line-height:1.3}
-.svc-row-price{font-family:var(--f-d);font-size:13px;font-weight:800;color:var(--g);min-width:72px;text-align:right}
+.svc-row.checked .svc-check{background:var(--peach);border-color:var(--peach);color:#000}
+.svc-row-name{font-family:var(--f-d);font-size:13.5px;font-weight:800;flex:1;line-height:1.3;color:var(--peach)}
+.svc-row-price{font-family:var(--f-d);font-size:13px;font-weight:800;color:var(--peach);min-width:72px;text-align:right}
 .svc-row-body{display:none;padding:0 14px 14px}
 .svc-row.checked .svc-row-body{display:block}
 .svc-row-body .fg{margin-top:10px;margin-bottom:0}
@@ -68,38 +96,38 @@ body{background:var(--bg);color:var(--w);font-family:var(--f-b);overflow-x:hidde
 
 /* TOGGLE SECTION */
 .ps{background:var(--s2);border:1px solid var(--b);border-radius:3px;padding:16px;margin-bottom:12px}
-.ps-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.ps-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--peach);margin-bottom:10px}
 .tog-row{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--b)}
 .tog-row:last-child{border-bottom:none}
 .tog-label{font-size:12px;font-weight:500;color:var(--muted)}
-.tog{width:34px;height:18px;border-radius:20px;background:var(--b2);cursor:pointer;position:relative;transition:background .2s;border:none;flex-shrink:0}
-.tog.on{background:var(--g)}
-.tog::after{content:'';position:absolute;top:3px;left:3px;width:12px;height:12px;border-radius:50%;background:#fff;transition:left .2s}
+.tog{width:34px;height:18px;border-radius:20px;background:rgba(247,234,224,0.12);cursor:pointer;position:relative;transition:background .2s;border:none;flex-shrink:0}
+.tog.on{background:var(--peach)}
+.tog::after{content:'';position:absolute;top:3px;left:3px;width:12px;height:12px;border-radius:50%;background:#111915;transition:left .2s;box-shadow:0 1px 4px rgba(0,0,0,0.4)}
 .tog.on::after{left:19px}
 .tog-fields{display:none;margin-top:12px}
 .tog-fields.show{display:block}
 
 /* BUTTONS */
 .btn{display:inline-flex;align-items:center;gap:7px;padding:10px 20px;border-radius:3px;font-family:var(--f-d);font-weight:700;font-size:13px;cursor:pointer;transition:all .2s;text-decoration:none;border:1px solid;letter-spacing:.02em}
-.btn.pri{background:var(--g);border-color:var(--g);color:#000}
-.btn.pri:hover{background:#16a34a;transform:translateY(-1px)}
+.btn.pri{background:var(--forest);border-color:var(--forest);color:#F7EAE0}
+.btn.pri:hover{background:#255741;transform:translateY(-1px);box-shadow:0 6px 20px rgba(29,69,51,.4)}
 .btn.ghost{background:transparent;border-color:var(--b2);color:var(--muted)}
-.btn.ghost:hover{border-color:var(--w);color:var(--w)}
-.btn.danger{background:transparent;border-color:rgba(239,68,68,.3);color:var(--danger);font-size:11px;padding:6px 12px}
-.btn.generate{width:100%;justify-content:center;padding:14px 20px;font-size:15px;background:var(--g);border-color:var(--g);color:#000;margin-top:4px}
-.btn.generate:hover{background:#16a34a;transform:translateY(-2px);box-shadow:0 8px 24px rgba(34,197,94,.25)}
+.btn.ghost:hover{border-color:var(--cream);color:var(--cream)}
+.btn.danger{background:transparent;border-color:rgba(94,49,34,.4);color:var(--peach);font-size:11px;padding:6px 12px}
+.btn.generate{width:100%;justify-content:center;padding:14px 20px;font-size:15px;background:var(--forest);border-color:var(--forest);color:#F7EAE0;margin-top:4px;letter-spacing:.04em}
+.btn.generate:hover{background:#255741;transform:translateY(-2px);box-shadow:0 8px 28px rgba(29,69,51,.5)}
 
 /* STEP NAV */
 .step-nav{padding:16px 28px;border-top:1px solid var(--b);background:var(--s1);flex-shrink:0;display:flex;flex-direction:column;gap:8px}
 .step-nav-row{display:flex;gap:8px}
 
 /* ─── PREVIEW PANE ─── */
-.preview-head{padding:16px 28px;border-bottom:1px solid var(--b);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:rgba(8,8,8,.92);backdrop-filter:blur(16px);z-index:10}
+.preview-head{padding:16px 28px;border-bottom:1px solid var(--b);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:rgba(10,16,13,.9);backdrop-filter:blur(20px);z-index:10}
 .ph-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .ph-hint{font-size:11px;color:var(--faint)}
 .ph-btn{display:flex;align-items:center;gap:6px;padding:8px 14px;font-family:var(--f-d);font-size:12px;font-weight:700;cursor:pointer;border-radius:3px;transition:all .2s}
-.ph-btn.pdf{background:var(--g);border:1px solid var(--g);color:#000}
-.ph-btn.pdf:hover{background:#16a34a}
+.ph-btn.pdf{background:var(--forest);border:1px solid var(--forest);color:#F7EAE0}
+.ph-btn.pdf:hover{background:#255741;box-shadow:0 4px 14px rgba(29,69,51,.4)}
 
 .preview-body{padding:32px 28px}
 .prev-empty{text-align:center;padding:80px 20px;color:var(--faint)}
@@ -107,89 +135,89 @@ body{background:var(--bg);color:var(--w);font-family:var(--f-b);overflow-x:hidde
 .prev-empty p{font-size:14px;line-height:1.65;color:var(--faint)}
 .prev-empty strong{color:var(--muted)}
 
-/* ─── DARK EDITORIAL STYLED QUOTATION DOCUMENT ─── */
-.q-card{background:var(--s1);border:1px solid var(--b);border-radius:5px;overflow:hidden;max-width:740px;margin:0 auto}
+/* ─── BRANDED QUOTATION DOCUMENT ─── */
+.q-card{background:var(--s1);border:1px solid var(--b);border-radius:5px;overflow:hidden;max-width:740px;margin:0 auto;box-shadow:0 0 0 1px rgba(247,234,224,0.06),0 24px 70px rgba(0,0,0,0.7)}
 .q-card-top{padding:32px 36px 24px;border-bottom:1px solid var(--b);display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
-.q-agency{font-family:var(--f-d);font-size:22px;font-weight:900}.q-agency em{font-style:normal;color:var(--g)}
+.q-agency{font-family:var(--f-d);font-size:22px;font-weight:900;color:var(--cream)}.q-agency em{font-style:normal;color:var(--logo-green)}
 .q-agency-tag{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:3px}
 .q-meta-info{text-align:right;font-size:11px;color:var(--muted);line-height:1.9}
-.q-meta-info strong{font-family:var(--f-d);font-size:14px;font-weight:800;color:var(--w);display:block;margin-bottom:2px}
+.q-meta-info strong{font-family:var(--f-d);font-size:14px;font-weight:800;color:var(--peach);display:block;margin-bottom:2px}
 .q-for{padding:24px 36px 20px;border-bottom:1px solid var(--b)}
-.q-for-lbl{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--g);margin-bottom:5px}
-.q-client{font-family:var(--f-d);font-size:32px;font-weight:900;letter-spacing:-.8px;line-height:1.05;color:var(--w)}
+.q-for-lbl{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--peach);margin-bottom:5px}
+.q-client{font-family:var(--f-d);font-size:34px;font-weight:900;letter-spacing:-.8px;line-height:1.05;color:var(--peach)}
 .q-city{font-size:13px;color:var(--muted);margin-top:3px}
-.q-tagline{padding:18px 36px;border-bottom:1px solid var(--b);font-size:14px;color:var(--muted);border-left:2px solid var(--g);margin:0;line-height:1.6;font-style:italic}
+.q-tagline{padding:18px 36px;border-bottom:1px solid var(--b);font-size:14px;color:var(--muted);border-left:3px solid var(--forest);margin:0;line-height:1.6;font-style:italic;background:var(--forest-d)}
 .q-body{padding:28px 36px}
 
 /* Service to Outcome Matrix Table */
 .matrix-tbl{width:100%;border-collapse:collapse;margin-top:8px}
-.matrix-tbl th{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:8px 10px;text-align:left;border-bottom:1px solid var(--b);background:var(--s2)}
+.matrix-tbl th{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--peach);padding:8px 10px;text-align:left;border-bottom:1px solid var(--b);background:var(--s2)}
 .matrix-tbl th:last-child{text-align:right}
 .matrix-tbl td{padding:14px 10px;border-bottom:1px solid var(--b);vertical-align:top;font-size:12px}
-.matrix-tbl td:last-child{text-align:right;font-family:var(--f-d);font-size:14px;font-weight:800;white-space:nowrap;color:var(--w)}
-.mx-name{font-family:var(--f-d);font-size:14px;font-weight:800;color:var(--w);margin-bottom:3px}
+.matrix-tbl td:last-child{text-align:right;font-family:var(--f-d);font-size:14px;font-weight:800;white-space:nowrap;color:var(--peach)}
+.mx-name{font-family:var(--f-d);font-size:14px;font-weight:800;color:var(--peach);margin-bottom:3px}
 .mx-deliv{font-size:11px;color:var(--muted);line-height:1.55}
 .mx-metrics{font-size:11px;color:var(--muted);line-height:1.55}
-.mx-influence{font-size:11px;color:var(--g);font-weight:600;line-height:1.55}
+.mx-influence{font-size:11px;color:var(--peach);font-weight:600;line-height:1.55}
 
 /* Investment summary box */
 .tot-box{background:var(--s2);border:1px solid var(--b);border-radius:4px;padding:20px 24px}
 .tot-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--b)}
 .tot-row:last-child{border-bottom:none;padding-top:14px;margin-top:4px}
-.tot-row.grand .tot-lbl{font-family:var(--f-d);font-size:15px;font-weight:800;color:var(--w)}
-.tot-row.grand .tot-val{font-family:var(--f-d);font-size:24px;font-weight:900;color:var(--g)}
-.tot-row.disc .tot-val{color:var(--amber)}
+.tot-row.grand .tot-lbl{font-family:var(--f-d);font-size:15px;font-weight:800;color:var(--cream)}
+.tot-row.grand .tot-val{font-family:var(--f-d);font-size:24px;font-weight:900;color:var(--peach)}
+.tot-row.disc .tot-val{color:var(--peach)}
 .tot-lbl{font-size:12px;color:var(--muted)}
 .tot-lbl small{display:block;font-size:10px;color:var(--faint);margin-top:1px}
-.tot-val{font-family:var(--f-d);font-size:15px;font-weight:700;color:var(--w)}
+.tot-val{font-family:var(--f-d);font-size:15px;font-weight:700;color:var(--peach)}
 
 /* Addons & Meta */
 .addon-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
 .addon-card{background:var(--s2);border:1px solid var(--b);border-radius:3px;padding:14px}
 .addon-lbl{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
-.addon-val{font-family:var(--f-d);font-size:20px;font-weight:900;color:var(--g)}
+.addon-val{font-family:var(--f-d);font-size:20px;font-weight:900;color:var(--peach)}
 .addon-sub{font-size:11px;color:var(--faint);margin-top:3px;line-height:1.5}
 
 .meta-tiers{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .mt-card{background:var(--s2);border:1px solid var(--b);border-radius:3px;padding:14px}
 .mt-lbl{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
-.mt-rate{font-family:var(--f-d);font-size:24px;font-weight:900;color:var(--g)}
+.mt-rate{font-family:var(--f-d);font-size:24px;font-weight:900;color:var(--peach)}
 .mt-desc{font-size:11px;color:var(--faint);margin-top:3px}
 
 /* Notes & Disclaimers */
-.q-notes-box{background:rgba(34,197,94,.05);border:1px solid rgba(34,197,94,.18);border-radius:3px;padding:16px 18px;font-size:12px;color:var(--muted);line-height:1.7}
-.q-disc-box{background:rgba(245,158,11,.05);border:1px solid rgba(245,158,11,.2);border-left:3px solid var(--amber);padding:14px 18px;border-radius:0 3px 3px 0;font-size:11px;color:rgba(245,158,11,.85);line-height:1.65}
+.q-notes-box{background:var(--forest-d);border:1px solid rgba(29,69,51,.3);border-radius:3px;padding:16px 18px;font-size:12px;color:var(--muted);line-height:1.7}
+.q-disc-box{background:var(--espresso-d);border:1px solid rgba(94,49,34,.35);border-left:3px solid var(--espresso);padding:14px 18px;border-radius:0 3px 3px 0;font-size:11px;color:var(--cream);line-height:1.65}
 .q-valid-bar{background:var(--s2);border:1px solid var(--b);border-radius:3px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
 .q-valid-lbl{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
-.q-valid-val{font-family:var(--f-d);font-size:14px;font-weight:800;color:var(--amber)}
+.q-valid-val{font-family:var(--f-d);font-size:14px;font-weight:800;color:var(--peach)}
 
 .q-footer{margin-top:28px;padding-top:20px;border-top:1px solid var(--b);display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px}
-.q-foot-agency{font-family:var(--f-d);font-size:14px;font-weight:800;color:var(--w)}.q-foot-agency em{font-style:normal;color:var(--g)}
+.q-foot-agency{font-family:var(--f-d);font-size:14px;font-weight:800;color:var(--cream)}.q-foot-agency em{font-style:normal;color:var(--logo-green)}
 .q-foot-contact{font-size:11px;color:var(--faint);text-align:right;line-height:1.9}
 
-/* ─── PRINT MODAL (EXACT SAME DARK EDITORIAL THEME FOR PDF) ─── */
-#print-modal{display:none;position:fixed;inset:0;background:#080808;z-index:9999;overflow-y:auto;padding:40px 20px}
+/* ─── PRINT MODAL ─── */
+#print-modal{display:none;position:fixed;inset:0;background:var(--bg);background-image:radial-gradient(ellipse 80% 60% at 0% 30%, rgba(29,69,51,0.25) 0%, transparent 60%);z-index:9999;overflow-y:auto;padding:40px 20px}
 #print-modal.show{display:block}
-.pm-actions{display:flex;gap:12px;justify-content:center;margin-bottom:28px;position:sticky;top:0;background:rgba(8,8,8,0.95);backdrop-filter:blur(10px);padding:16px 0;z-index:10;border-bottom:1px solid var(--b)}
-#print-doc{max-width:820px;margin:0 auto;background:var(--s1);border:1px solid var(--b);border-radius:6px;padding:48px 52px;color:var(--w)}
+.pm-actions{display:flex;gap:12px;justify-content:center;margin-bottom:28px;position:sticky;top:0;background:rgba(10,16,13,0.95);backdrop-filter:blur(14px);padding:16px 0;z-index:10;border-bottom:1px solid var(--b)}
+#print-doc{max-width:820px;margin:0 auto;background:var(--s1);border:1px solid var(--b);border-radius:6px;padding:48px 52px;color:var(--cream);box-shadow:0 0 0 1px rgba(247,234,224,0.08),0 24px 80px rgba(0,0,0,0.8)}
 
-/* ─── PRINT / PDF EXPORT OVERRIDES (Retains Dark Aesthetic) ─── */
+/* ─── PRINT / PDF EXPORT OVERRIDES ─── */
 @media print{
   * {-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important}
-  body,html{background:#080808!important;color:#ffffff!important;margin:0;padding:0}
-  #print-modal{display:block!important;position:static!important;background:#080808!important;padding:0!important;overflow:visible!important}
+  body,html{background:#0A100D!important;color:#F7EAE0!important;margin:0;padding:0}
+  #print-modal{display:block!important;position:static!important;background:#0A100D!important;padding:0!important;overflow:visible!important}
   .pm-actions{display:none!important}
   #print-doc{
-    background:#080808!important;border:none!important;border-radius:0!important;
+    background:#111915!important;border:none!important;border-radius:0!important;
     padding:28px 36px!important;max-width:100%!important;margin:0!important;
-    box-shadow:none!important;color:#ffffff!important;
+    box-shadow:none!important;color:#F7EAE0!important;
   }
   body>*:not(#print-modal){display:none!important}
-  @page{margin:10mm;size:A4;background:#080808}
+  @page{margin:10mm;size:A4}
 }
 
 /* TOAST */
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(60px);background:var(--g);color:#000;font-family:var(--f-d);font-size:13px;font-weight:700;padding:12px 22px;border-radius:3px;z-index:99999;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(60px);background:var(--forest);color:#F7EAE0;font-family:var(--f-d);font-size:13px;font-weight:700;padding:12px 22px;border-radius:3px;z-index:99999;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap;box-shadow:0 8px 24px rgba(29,69,51,.4)}
 .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 
 /* RESPONSIVE */
@@ -396,10 +424,10 @@ let svcs=[
   {
     id:'s1',
     name:'Content Creation',
-    desc:'Monthly reels, food/brand photography, graphics, and video storytelling.',
+    desc:'Monthly reels, brand & product photography, graphics, and video storytelling.',
     deliverables:'30 Reels + 10 Graphic/Photo Posts / Month',
     metrics:'Reach, Video Views, Engagement Rate, Saves, Shares',
-    influence:'Brand Awareness, Discovery, Customer Curiosity & Visit Intent',
+    influence:'Brand Awareness, Discovery, Customer Curiosity & Action Intent',
     price:0,
     on:true
   },
@@ -426,37 +454,37 @@ let svcs=[
   {
     id:'s4',
     name:'Basic Website Development',
-    desc:'A modern, mobile-first digital destination organizing outlet info, events, menu discovery, and directions.',
-    deliverables:'Mobile Website + Menu Directory + Directions Setup',
-    metrics:'Website Visitors, Page Views, Direction Requests, Menu Clicks',
-    influence:'Visit Planning, Customer Convenience & Conversion Paths',
+    desc:'A modern, mobile-first digital destination organizing brand info, services, menu/catalog, and booking/contact paths.',
+    deliverables:'Mobile Website + Service/Catalog Directory + Booking/Directions Setup',
+    metrics:'Website Visitors, Page Views, Lead Inquiries, Action Clicks',
+    influence:'Brand Authority, Customer Convenience & Conversion Paths',
     price:0,
     on:true
   },
   {
     id:'s5',
     name:'Performance Marketing (Paid Distribution)',
-    desc:'Hyper-targeted campaigns for local Bhopal awareness, footfall intent, events, and retargeting.',
+    desc:'Hyper-targeted ad campaigns for brand awareness, customer acquisition, lead intent, and retargeting.',
     deliverables:'Meta/Google Campaign Setup + Audience Testing + Optimization',
-    metrics:'Local CPM, CTR, Link Clicks, Location Intent Actions',
-    influence:'Qualified Local Reach, Scalable Footfall & Measurable Intent',
+    metrics:'Local CPM, CTR, Link Clicks, Conversion Intent Actions',
+    influence:'Qualified Target Reach, Scalable Lead Intent & Measurable ROI',
     price:0,
     on:true
   },
   {
     id:'s6',
     name:'Influencer Marketing Strategy & Management',
-    desc:'Identifying, coordinating, and managing local food & lifestyle creators for authentic social proof.',
+    desc:'Identifying, coordinating, and managing local niche & lifestyle creators for authentic social proof.',
     deliverables:'Creator Sourcing + Briefing + Campaign Coordination',
     metrics:'Creator Reach, Story Views, UGC Shares, Profile Influx',
-    influence:'Local Social Proof, Trusted Discovery & New Customer Acquisition',
+    influence:'Social Proof, Trusted Brand Discovery & New Customer Acquisition',
     price:0,
     on:true
   },
   {
     id:'s7',
     name:'Cinematic Video Production',
-    desc:'High-end video shoots, outlet highlight reels, and promo brand films.',
+    desc:'High-end video shoots, brand highlight reels, and promotional films.',
     deliverables:'Concept + Professional Shoot + Editing + Audio Design',
     metrics:'Watch Time, Completion Rate, Shares, Brand Quality Perception',
     influence:'Perceived Value, Premium Positioning & Viral Attention',
@@ -466,10 +494,10 @@ let svcs=[
   {
     id:'s8',
     name:'Google Search & Maps Ads',
-    desc:'Capturing active intent when people search for food destinations in Bhopal.',
+    desc:'Capturing active intent when prospective clients search for your services online.',
     deliverables:'Google Ads Setup + Keyword Strategy + Maps Ads',
     metrics:'Search Impression Share, Direction Clicks, Call Clicks',
-    influence:'High-Intent Customer Capture & Direct Local Footfall',
+    influence:'High-Intent Customer Capture & Direct Local Conversion',
     price:0,
     on:false
   }
@@ -614,58 +642,58 @@ function buildDoc(){
   const mHigh=parseFloat(g('f-meta-high'))||10;
 
   const agencyDisplay=agency.toLowerCase()==='miniad.io'
-    ?`Mini<em style="font-style:normal;color:#22C55E">ad.io</em>` : agency;
+    ?`Mini<em style="font-style:normal;color:#00D87C">ad.io</em>` : agency;
 
   let h=`
   <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px;margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,0.08)">
     <div>
-      <div style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:900;color:#ffffff">${agencyDisplay}</div>
-      <div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#888888;margin-top:3px">Content-First Growth Partner</div>
+      <div style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:900;color:#F7EAE0">${agencyDisplay}</div>
+      <div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#C9BEB5;margin-top:3px">Content-First Growth Partner</div>
     </div>
-    <div style="text-align:right;font-size:11px;color:#888888;line-height:1.9">
-      <strong style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;color:#ffffff;display:block;letter-spacing:.06em;text-transform:uppercase">Growth System Proposal</strong>
-      ${qnum?`<span style="color:#22C55E;font-weight:600">${qnum}</span><br>`:''}
+    <div style="text-align:right;font-size:11px;color:#C9BEB5;line-height:1.9">
+      <strong style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;color:#F9D2BA;display:block;letter-spacing:.06em;text-transform:uppercase">Growth System Proposal</strong>
+      ${qnum?`<span style="color:#F9D2BA;font-weight:600">${qnum}</span><br>`:''}
       ${date?`<span>Date: ${fmtDate(date)}</span><br>`:''}
       ${contact?`<span>Prepared for: ${contact}</span>`:''}
     </div>
   </div>
 
   <div style="margin-bottom:24px">
-    <div style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#22C55E;margin-bottom:4px">Prepared for</div>
-    <div style="font-family:'Outfit',sans-serif;font-size:34px;font-weight:900;letter-spacing:-.8px;line-height:1.05;color:#ffffff">${client}</div>
-    ${city?`<div style="font-size:13px;color:#888888;margin-top:4px">${city}${industry?` · <span style="color:#aaaaaa">${industry}</span>`:''}</div>`:''}
+    <div style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#F9D2BA;margin-bottom:4px">Prepared for</div>
+    <div style="font-family:'Outfit',sans-serif;font-size:34px;font-weight:900;letter-spacing:-.8px;line-height:1.05;color:#F9D2BA">${client}</div>
+    ${city?`<div style="font-size:13px;color:#C9BEB5;margin-top:4px">${city}${industry?` · <span style="color:#C9BEB5">${industry}</span>`:''}</div>`:''}
   </div>
 
-  ${tagline?`<div style="font-size:14px;color:#cccccc;border-left:3px solid #22C55E;padding:12px 18px;margin-bottom:28px;font-style:italic;line-height:1.6;background:rgba(34,197,94,0.03);border-radius:0 3px 3px 0">${tagline}</div>`:''}
+  ${tagline?`<div style="font-size:14px;color:#F7EAE0;border-left:3px solid #F9D2BA;padding:12px 18px;margin-bottom:28px;font-style:italic;line-height:1.6;background:rgba(29,69,51,0.06);border-radius:0 3px 3px 0">${tagline}</div>`:''}
   `;
 
   // SERVICES MATRIX TABLE
   if(checkedSvcs.length>0){
     h+=`<div style="margin-bottom:28px">
-      <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#22C55E;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:14px">Growth System Modules & Outcome Framework</div>
+      <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#F9D2BA;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:14px">Growth System Modules & Outcome Framework</div>
       <table style="width:100%;border-collapse:collapse">
         <thead>
-          <tr style="background:#161616">
-            <th style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#888888;padding:9px 10px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.08)">Growth Service</th>
-            <th style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#888888;padding:9px 10px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.08)">Scope & Deliverables</th>
-            ${bools.matrix?`<th style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#888888;padding:9px 10px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.08)">What We Measure & Influence</th>`:''}
-            <th style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#888888;padding:9px 10px;text-align:right;border-bottom:1px solid rgba(255,255,255,0.08)">Allocation</th>
+          <tr style="background:#18221D">
+            <th style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#F9D2BA;padding:9px 10px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.08)">Growth Service</th>
+            <th style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#F9D2BA;padding:9px 10px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.08)">Scope & Deliverables</th>
+            ${bools.matrix?`<th style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#F9D2BA;padding:9px 10px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.08)">What We Measure & Influence</th>`:''}
+            <th style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#F9D2BA;padding:9px 10px;text-align:right;border-bottom:1px solid rgba(255,255,255,0.08)">Allocation</th>
           </tr>
         </thead>
         <tbody>
         ${checkedSvcs.map(s=>`
           <tr>
             <td style="padding:12px 10px;border-bottom:1px solid rgba(255,255,255,0.06);vertical-align:top">
-              <div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;color:#ffffff;margin-bottom:2px">${s.customName||s.name}</div>
-              ${s.desc?`<div style="font-size:11px;color:#888888;line-height:1.5">${s.desc}</div>`:''}
+              <div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;color:#F9D2BA;margin-bottom:2px">${s.customName||s.name}</div>
+              ${s.desc?`<div style="font-size:11px;color:#C9BEB5;line-height:1.5">${s.desc}</div>`:''}
             </td>
-            <td style="padding:12px 10px;border-bottom:1px solid rgba(255,255,255,0.06);font-size:11px;color:#cccccc;vertical-align:top;line-height:1.5">${s.deliverables||'—'}</td>
+            <td style="padding:12px 10px;border-bottom:1px solid rgba(255,255,255,0.06);font-size:11px;color:#F9D2BA;vertical-align:top;line-height:1.5">${s.deliverables||'—'}</td>
             ${bools.matrix?`
             <td style="padding:12px 10px;border-bottom:1px solid rgba(255,255,255,0.06);font-size:11px;vertical-align:top;line-height:1.5">
-              ${s.metrics?`<div style="color:#888888;margin-bottom:3px"><span style="color:#666666">Track:</span> ${s.metrics}</div>`:''}
-              ${s.influence?`<div style="color:#22C55E;font-weight:600"><span style="color:#15803d">Influence:</span> ${s.influence}</div>`:''}
+              ${s.metrics?`<div style="color:#C9BEB5;margin-bottom:3px"><span style="color:#756B63">Track:</span> ${s.metrics}</div>`:''}
+              ${s.influence?`<div style="color:#F9D2BA;font-weight:600"><span style="color:#F9D2BA">Influence:</span> ${s.influence}</div>`:''}
             </td>`:''}
-            <td style="padding:12px 10px;border-bottom:1px solid rgba(255,255,255,0.06);text-align:right;font-family:'Outfit',sans-serif;font-weight:800;font-size:14px;vertical-align:top;white-space:nowrap;color:#ffffff">${s.price?fmt(s.price):`<span style="font-size:11px;font-weight:600;color:#22C55E;background:rgba(34,197,94,0.08);padding:3px 8px;border-radius:2px">Included</span>`}</td>
+            <td style="padding:12px 10px;border-bottom:1px solid rgba(255,255,255,0.06);text-align:right;font-family:'Outfit',sans-serif;font-weight:800;font-size:14px;vertical-align:top;white-space:nowrap;color:#F9D2BA">${s.price?fmt(s.price):`<span style="font-size:11px;font-weight:600;color:#F9D2BA;background:rgba(249,210,186,0.1);padding:3px 8px;border-radius:2px">Included</span>`}</td>
           </tr>
         `).join('')}
         </tbody>
@@ -673,36 +701,36 @@ function buildDoc(){
     </div>`;
 
     // INVESTMENT TOTALS BOX
-    h+=`<div style="background:#161616;border:1px solid rgba(255,255,255,0.08);border-radius:4px;padding:20px 24px;margin-bottom:24px">
+    h+=`<div style="background:#18221D;border:1px solid rgba(255,255,255,0.08);border-radius:4px;padding:20px 24px;margin-bottom:24px">
       <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.08)">
-        <div style="font-size:12px;color:#888888">Core Growth Modules Allocation<small style="display:block;font-size:10px;color:#555555">Combined monthly strategic execution</small></div>
-        <div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#ffffff">${fmt(total)}</div>
+        <div style="font-size:12px;color:#C9BEB5">Core Growth Modules Allocation<small style="display:block;font-size:10px;color:#756B63">Combined monthly strategic execution</small></div>
+        <div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#F9D2BA">${fmt(total)}</div>
       </div>
       ${flags.disc&&discAmt?`<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.08)">
-        <div style="font-size:12px;color:#F59E0B">${discLabel}</div>
-        <div style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:#F59E0B">− ${fmt(discAmt)}</div>
+        <div style="font-size:12px;color:#F9D2BA">${discLabel}</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:#F9D2BA">− ${fmt(discAmt)}</div>
       </div>`:''}
       <div style="display:flex;justify-content:space-between;align-items:center;padding-top:14px;margin-top:4px">
         <div>
-          <div style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:800;color:#ffffff">TOTAL ${cycle.toUpperCase()} GROWTH PARTNERSHIP INVESTMENT</div>
-          <div style="font-size:10px;color:#666666;margin-top:2px">Direct agency strategic & executional partnership</div>
+          <div style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:800;color:#F9D2BA">TOTAL ${cycle.toUpperCase()} GROWTH PARTNERSHIP INVESTMENT</div>
+          <div style="font-size:10px;color:#756B63;margin-top:2px">Direct agency strategic & executional partnership</div>
         </div>
-        <div style="font-family:'Outfit',sans-serif;font-size:26px;font-weight:900;color:#22C55E">${fmt(afterDisc)}</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:26px;font-weight:900;color:#F9D2BA">${fmt(afterDisc)}</div>
       </div>
     </div>
-    <div style="font-size:11px;color:#666666;text-align:right;margin-bottom:24px;margin-top:-14px">Schedule: <strong style="color:#aaaaaa">${payTerms}</strong> · Cycle: ${cycle}</div>`;
+    <div style="font-size:11px;color:#756B63;text-align:right;margin-bottom:24px;margin-top:-14px">Schedule: <strong style="color:#C9BEB5">${payTerms}</strong> · Cycle: ${cycle}</div>`;
   }
 
   // ADD-ONS
   if(flags.ev||flags.meta){
     h+=`<div style="margin-bottom:28px">
-      <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#888888;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:14px">Performance Add-Ons & Media Management</div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#F9D2BA;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:14px">Performance Add-Ons & Media Management</div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px">`;
     if(flags.ev){
-      h+=`<div style="background:#161616;border:1px solid rgba(255,255,255,0.08);border-radius:3px;padding:16px">
-        <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#888888;margin-bottom:5px">Event Coverage Module</div>
-        <div style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:900;color:#22C55E">₹${n(evPrice)}</div>
-        <div style="font-size:11px;color:#666666;margin-top:3px;line-height:1.5">per event · ${evInc}</div>
+      h+=`<div style="background:#18221D;border:1px solid rgba(255,255,255,0.08);border-radius:3px;padding:16px">
+        <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#C9BEB5;margin-bottom:5px">Event Coverage Module</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:900;color:#F9D2BA">₹${n(evPrice)}</div>
+        <div style="font-size:11px;color:#756B63;margin-top:3px;line-height:1.5">per event · ${evInc}</div>
       </div>`;
     }
     h+=`</div></div>`;
@@ -711,43 +739,43 @@ function buildDoc(){
   // META AD FEES
   if(flags.meta){
     h+=`<div style="margin-bottom:28px">
-      <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#888888;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:14px">Meta Performance Ad Management Structure</div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#F9D2BA;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:14px">Meta Performance Ad Management Structure</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
-        <div style="background:#161616;border:1px solid rgba(255,255,255,0.08);border-radius:3px;padding:16px">
-          <div style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#888888;margin-bottom:5px">Monthly Ad Spend Below ₹${n(mThresh)}</div>
-          <div style="font-family:'Outfit',sans-serif;font-size:26px;font-weight:900;color:#22C55E">${mLow}%</div>
-          <div style="font-size:11px;color:#666666;margin-top:3px">Management Fee of total ad spend</div>
+        <div style="background:#18221D;border:1px solid rgba(255,255,255,0.08);border-radius:3px;padding:16px">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#C9BEB5;margin-bottom:5px">Monthly Ad Spend Below ₹${n(mThresh)}</div>
+          <div style="font-family:'Outfit',sans-serif;font-size:26px;font-weight:900;color:#F9D2BA">${mLow}%</div>
+          <div style="font-size:11px;color:#756B63;margin-top:3px">Management Fee of total ad spend</div>
         </div>
-        <div style="background:#161616;border:1px solid rgba(255,255,255,0.08);border-radius:3px;padding:16px">
-          <div style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#888888;margin-bottom:5px">Monthly Ad Spend Above ₹${n(mThresh)}</div>
-          <div style="font-family:'Outfit',sans-serif;font-size:26px;font-weight:900;color:#22C55E">${mHigh}%</div>
-          <div style="font-size:11px;color:#666666;margin-top:3px">Management Fee of total ad spend</div>
+        <div style="background:#18221D;border:1px solid rgba(255,255,255,0.08);border-radius:3px;padding:16px">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#C9BEB5;margin-bottom:5px">Monthly Ad Spend Above ₹${n(mThresh)}</div>
+          <div style="font-family:'Outfit',sans-serif;font-size:26px;font-weight:900;color:#F9D2BA">${mHigh}%</div>
+          <div style="font-size:11px;color:#756B63;margin-top:3px">Management Fee of total ad spend</div>
         </div>
       </div>
-      <p style="font-size:11px;color:#666666;line-height:1.6">Media spend is paid directly to advertising platforms (Meta/Google) and is separate from miniad.io’s strategic partnership investment.</p>
+      <p style="font-size:11px;color:#756B63;line-height:1.6">Media spend is paid directly to advertising platforms (Meta/Google) and is separate from miniad.io’s strategic partnership investment.</p>
     </div>`;
   }
 
   // STRATEGIC NOTES
   if(notes){
     h+=`<div style="margin-bottom:28px">
-      <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#888888;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:14px">Executive Notes</div>
-      <div style="background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.18);border-radius:3px;padding:16px;font-size:12px;color:#888888;line-height:1.75">${notes.replace(/\n/g,'<br>')}</div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#F9D2BA;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:14px">Executive Notes</div>
+      <div style="background:rgba(29,69,51,0.05);border:1px solid rgba(29,69,51,0.18);border-radius:3px;padding:16px;font-size:12px;color:#C9BEB5;line-height:1.75">${notes.replace(/\n/g,'<br>')}</div>
     </div>`;
   }
 
   // WHAT WE MEASURE FRAMEWORK
   if(bools.measure){
     h+=`<div style="margin-bottom:28px">
-      <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#22C55E;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:14px">Performance & Growth Measurement Principles</div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#F9D2BA;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:14px">Performance & Growth Measurement Principles</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-        <div style="background:#161616;border:1px solid rgba(255,255,255,0.06);padding:14px;border-radius:3px">
-          <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#22C55E;margin-bottom:4px">WHAT WE CONTROL</div>
-          <div style="font-size:11px;color:#888888;line-height:1.6">Content quality, creative execution, audience targeting, testing, optimization, and monthly strategy adaptation.</div>
+        <div style="background:#18221D;border:1px solid rgba(255,255,255,0.06);padding:14px;border-radius:3px">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#F9D2BA;margin-bottom:4px">WHAT WE CONTROL</div>
+          <div style="font-size:11px;color:#C9BEB5;line-height:1.6">Content quality, creative execution, audience targeting, testing, optimization, and monthly strategy adaptation.</div>
         </div>
-        <div style="background:#161616;border:1px solid rgba(255,255,255,0.06);padding:14px;border-radius:3px">
-          <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#22C55E;margin-bottom:4px">WHAT WE MEASURE</div>
-          <div style="font-size:11px;color:#888888;line-height:1.6">Reach, engagement rate, local discovery, website intent actions, direction requests, event inquiries, and campaign responses.</div>
+        <div style="background:#18221D;border:1px solid rgba(255,255,255,0.06);padding:14px;border-radius:3px">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#F9D2BA;margin-bottom:4px">WHAT WE MEASURE</div>
+          <div style="font-size:11px;color:#C9BEB5;line-height:1.6">Reach, engagement rate, local discovery, website intent actions, direction requests, event inquiries, and campaign responses.</div>
         </div>
       </div>
     </div>`;
@@ -755,28 +783,28 @@ function buildDoc(){
 
   // DISCLAIMER
   if(bools.disclaimer){
-    h+=`<div style="background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.2);border-left:3px solid #F59E0B;padding:14px 16px;border-radius:0 3px 3px 0;margin-bottom:28px;font-size:11px;color:rgba(245,158,11,0.85);line-height:1.7">
+    h+=`<div style="background:rgba(249,210,186,0.05);border:1px solid rgba(249,210,186,0.2);border-left:3px solid #F9D2BA;padding:14px 16px;border-radius:0 3px 3px 0;margin-bottom:28px;font-size:11px;color:rgba(249,210,186,0.85);line-height:1.7">
       <strong style="display:block;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px">Transparent Governance Principle</strong>
-      Marketing results and footfall depend on multiple operational factors including customer experience, food quality, pricing, competition, and seasonality. No specific number of followers, sales, or footfall is artificially guaranteed. Our commitment is to strategic execution, rigorous data measurement, and continuous optimization toward business growth indicators.
+      Marketing performance and business growth depend on multiple operational factors including customer experience, product/service quality, pricing, competition, and market conditions. No specific number of followers, revenue, or sales is artificially guaranteed. Our commitment is to strategic execution, rigorous data measurement, and continuous optimization toward business growth indicators.
     </div>`;
   }
 
   // TERMS
   h+=`<div style="margin-bottom:28px">
-    <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#888888;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:14px">Partnership Governance Terms</div>
-    <div style="font-size:11px;color:#888888;line-height:2">
-      <strong style="color:#ffffff">Payment Schedule: </strong>${payTerms}<br>
-      <strong style="color:#ffffff">Quotation Validity: </strong>${valid?`Valid until ${fmtDate(valid)}.`:'Valid for 15 days from date above.'}<br>
-      <strong style="color:#ffffff">External Media & Talent: </strong>Advertising spend and third-party influencer talent fees are funded directly by the client.<br>
-      <strong style="color:#ffffff">Continuous Iteration: </strong>Monthly review sessions refine content strategy based on validated top-performing formats.
+    <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#C9BEB5;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:14px">Partnership Governance Terms</div>
+    <div style="font-size:11px;color:#C9BEB5;line-height:2">
+      <strong style="color:#F7EAE0">Payment Schedule: </strong>${payTerms}<br>
+      <strong style="color:#F7EAE0">Quotation Validity: </strong>${valid?`Valid until ${fmtDate(valid)}.`:'Valid for 15 days from date above.'}<br>
+      <strong style="color:#F7EAE0">External Media & Talent: </strong>Advertising spend and third-party influencer talent fees are funded directly by the client.<br>
+      <strong style="color:#F7EAE0">Continuous Iteration: </strong>Monthly review sessions refine content strategy based on validated top-performing formats.
     </div>
   </div>`;
 
   // VALIDITY BADGE
   if(valid){
-    h+=`<div style="background:#161616;border:1px solid rgba(255,255,255,0.08);border-radius:3px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:28px">
-      <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#666666">Proposal Validity Period</div>
-      <div style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:800;color:#F59E0B">Valid until ${fmtDate(valid)}</div>
+    h+=`<div style="background:#1C1715;border:1px solid rgba(255,255,255,0.08);border-radius:3px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:28px">
+      <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#756B63">Proposal Validity Period</div>
+      <div style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:800;color:#F9D2BA">Valid until ${fmtDate(valid)}</div>
     </div>`;
   }
 
@@ -784,10 +812,10 @@ function buildDoc(){
   if(bools.sig){
     h+=`<div style="padding-top:20px;border-top:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px">
       <div>
-        <div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:900;color:#ffffff">${agencyDisplay}</div>
-        ${web?`<div style="font-size:10px;color:#666666;margin-top:2px">${web}</div>`:''}
+        <div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:900;color:#F7EAE0">${agencyDisplay}</div>
+        ${web?`<div style="font-size:10px;color:#756B63;margin-top:2px">${web}</div>`:''}
       </div>
-      <div style="font-size:10px;color:#666666;text-align:right;line-height:1.9">
+      <div style="font-size:10px;color:#756B63;text-align:right;line-height:1.9">
         ${phone?phone+'<br>':''}${email?email+'<br>':''}${web||''}
       </div>
     </div>`;
